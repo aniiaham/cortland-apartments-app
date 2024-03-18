@@ -75,10 +75,36 @@ async function ApartmentsList() {
   const { apartments } = await fetchApartments();
   if (!apartments) return;
 
-  return apartments.map((apt) => (
-    <div>
-      <p key={apt.Number}>{apt.Floorplan}</p>
-      <p>{apt.Availability}</p>
+  return (
+    <div className="grid grid-cols-3 gap-20">
+      {apartments.map((apt) => (
+        <div
+          className="border border-blue-950 rounded-md w-full"
+          key={apt.Number}
+        >
+          <p>{apt.Floorplan}</p>
+          <div className="flex flex-row gap-2">
+            <p>{apt.Sqft} sq. ft. |</p>
+            <p>{apt.Bed_count === 0 ? "Studio" : `${apt.Bed_count} Bed`} |</p>
+            <p>{apt.Bath_count} Bath</p>
+          </div>
+          <div>
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
+              alt="studio centennial floor plan img"
+              width={100}
+              height={100}
+            />
+          </div>
+          <div className="flex flex-col">
+            <p>Starting at ${apt.Price}</p>
+            <p>
+              Available starting{" "}
+              {new Date(apt.Availability * 1000).toLocaleDateString("en-US")}
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
-  ));
+  );
 }

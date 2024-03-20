@@ -43,11 +43,11 @@ export default function Home() {
             Floor Plans
           </h1>
         </div>
-        <div className="flex flex-col justify-start items-center max-w-4xl gap-4">
-          <h2 className="text-blue-900 font-serif font-normal text-[33.6px]">
+        <div className="flex flex-col justify-start items-center max-w-3xl gap-4">
+          <h2 className="text-blue-900 font-serif font-extralight text-[33.6px]">
             Find Your Perfect Fit at Our Nashville, Tennessee Apartment Homes
           </h2>
-          <p className="text-blue-900 font-serif font-normal text-xl">
+          <p className="text-blue-900 font-serif font-extralight text-[16.8px]">
             With designer features like granite countertops and private patios
             and balconies, our brand-new studio, one, and two-bedroom apartments
             for rent in West Nashville brighten your everyday – from the moment
@@ -55,7 +55,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div>
+      <div className="mt-8">
         <p className="text-lg text-blue-900">Available Apts</p>
         <Suspense fallback={<Loading />}>
           <ApartmentsList />
@@ -76,29 +76,79 @@ async function ApartmentsList() {
   if (!apartments) return;
 
   return (
-    <div className="grid grid-cols-3 gap-20">
+    <div className="grid grid-cols-2 gap-20 w-full my-8">
       {apartments.map((apt) => (
         <div
-          className="border border-blue-950 rounded-md w-full"
+          className="border border-gray-300 rounded-md py-8 px-6"
           key={apt.Number}
         >
-          <p>{apt.Floorplan}</p>
-          <div className="flex flex-row gap-2">
+          <p className="text-lg text-blue-900 font-medium font-sans">
+            {apt.Floorplan}
+          </p>
+          <div className="flex flex-row gap-2 text-xs text-blue-900 font-light">
             <p>{apt.Sqft} sq. ft. |</p>
             <p>{apt.Bed_count === 0 ? "Studio" : `${apt.Bed_count} Bed`} |</p>
             <p>{apt.Bath_count} Bath</p>
           </div>
           <div>
-            <Image
-              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
-              alt="studio centennial floor plan img"
-              width={100}
-              height={100}
-            />
+            {apt.Floorplan === "Centennial" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : apt.Floorplan === "Clifton" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : apt.Floorplan === "Cumberland" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : apt.Floorplan === "Germantown" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : apt.Floorplan === "The Gulch" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : apt.Floorplan === "Music Row" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : apt.Floorplan === "Urbandale" ? (
+              <Image
+                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
+                alt="studio centennial floor plan img"
+                width={400}
+                height={500}
+              />
+            ) : (
+              "Error"
+            )}
           </div>
           <div className="flex flex-col">
-            <p>Starting at ${apt.Price}</p>
-            <p>
+            <p className="text-sm text-blue-900 font-medium font-sans">
+              Starting at ${apt.Price}
+            </p>
+            <p className="text-xs text-blue-900">
               Available starting{" "}
               {new Date(apt.Availability * 1000).toLocaleDateString("en-US")}
             </p>

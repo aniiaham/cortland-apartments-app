@@ -76,19 +76,24 @@ async function ApartmentsList() {
   if (!apartments) return;
 
   return (
-    <div className="grid grid-cols-2 gap-20 w-full my-8">
+    <div className="grid grid-cols-2 gap-20 w-full my-8 h-full">
       {apartments.map((apt) => (
         <div
-          className="border border-gray-300 rounded-md py-8 px-6"
+          className="border border-gray-300 rounded-md py-8 px-6 hover:border-gray-500 shadow-md hover:cursor-pointer flex flex-col gap-12"
           key={apt.Number}
         >
-          <p className="text-lg text-blue-900 font-medium font-sans">
-            {apt.Floorplan}
-          </p>
-          <div className="flex flex-row gap-2 text-xs text-blue-900 font-light">
-            <p>{apt.Sqft} sq. ft. |</p>
-            <p>{apt.Bed_count === 0 ? "Studio" : `${apt.Bed_count} Bed`} |</p>
-            <p>{apt.Bath_count} Bath</p>
+          <div>
+            <p className="text-lg text-blue-900 font-medium font-sans">
+              {apt.Floorplan}
+            </p>
+            <p className="text-base text-blue-900 font-medium font-sans">
+              Apt #{apt.Number}
+            </p>
+            <div className="flex flex-row gap-2 text-xs text-blue-900 font-light">
+              <p>{apt.Sqft} sq. ft. |</p>
+              <p>{apt.Bed_count === 0 ? "Studio" : `${apt.Bed_count} Bed`} |</p>
+              <p>{apt.Bath_count} Bath</p>
+            </div>
           </div>
           <div>
             {apt.Floorplan === "Centennial" ? (

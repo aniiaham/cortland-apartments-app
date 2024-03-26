@@ -2,19 +2,17 @@ import Image from "next/image";
 import { Suspense } from "react";
 import Loading from "./loading";
 
-type Apartments = {
-  Number: number;
-  Price: number;
-  Floorplan: string;
-  Bed_count: 0 | 1 | 2 | 3;
-  Bath_count: 0 | 1 | 2 | 3;
-  Sqft: number;
-  Availability: number;
-  Date: Date;
-  Location: string;
-  State: "TN";
-  City: "Nashville";
-};
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import fetchApartments from "./fetchApartments";
 
 export default function Home() {
   return (
@@ -65,12 +63,6 @@ export default function Home() {
   );
 }
 
-const fetchApartments = async () => {
-  const res = await fetch("http://localhost:6969/apartments");
-  const response = (await res.json()) as { apartments: Apartments[] };
-  return response;
-};
-
 async function ApartmentsList() {
   const { apartments } = await fetchApartments();
   if (!apartments) return;
@@ -78,88 +70,132 @@ async function ApartmentsList() {
   return (
     <div className="grid grid-cols-2 gap-20 w-full my-8 h-full">
       {apartments.map((apt) => (
-        <div
-          className="border border-gray-300 rounded-md py-8 px-6 hover:border-gray-500 shadow-md hover:cursor-pointer flex flex-col gap-12"
+        <DialogApartment
           key={apt.Number}
+          apt_number={apt.Number}
+          apt_floorplan={apt.Floorplan}
         >
-          <div>
-            <p className="text-lg text-blue-900 font-medium font-sans">
-              {apt.Floorplan}
-            </p>
-            <p className="text-base text-blue-900 font-medium font-sans">
-              Apt #{apt.Number}
-            </p>
-            <div className="flex flex-row gap-2 text-xs text-blue-900 font-light">
-              <p>{apt.Sqft} sq. ft. |</p>
-              <p>{apt.Bed_count === 0 ? "Studio" : `${apt.Bed_count} Bed`} |</p>
-              <p>{apt.Bath_count} Bath</p>
+          <div
+            className="border border-gray-300 rounded-md py-8 px-6 hover:border-gray-500 shadow-md hover:cursor-pointer flex flex-col gap-12"
+            key={apt.Number}
+          >
+            <div>
+              <p className="text-lg text-blue-900 font-medium font-sans">
+                {apt.Floorplan}
+              </p>
+              <p className="text-base text-blue-900 font-medium font-sans">
+                Apt #{apt.Number}
+              </p>
+              <div className="flex flex-row gap-2 text-xs text-blue-900 font-light">
+                <p>{apt.Sqft} sq. ft. |</p>
+                <p>
+                  {apt.Bed_count === 0 ? "Studio" : `${apt.Bed_count} Bed`} |
+                </p>
+                <p>{apt.Bath_count} Bath</p>
+              </div>
+            </div>
+            <div>
+              {apt.Floorplan === "Centennial" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : apt.Floorplan === "Clifton" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : apt.Floorplan === "Cumberland" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : apt.Floorplan === "Germantown" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : apt.Floorplan === "The Gulch" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : apt.Floorplan === "Music Row" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : apt.Floorplan === "Urbandale" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
+              ) : (
+                "Error"
+              )}
+            </div>
+            <div className="flex flex-row justify-between text-blue-900">
+              <div className="flex flex-col">
+                <p className="text-sm  font-medium font-sans">
+                  Starting at ${apt.Price}
+                </p>
+                <p className="text-xs">
+                  Available starting{" "}
+                  {new Date(apt.Availability * 1000).toLocaleDateString(
+                    "en-US"
+                  )}
+                </p>
+              </div>
             </div>
           </div>
-          <div>
-            {apt.Floorplan === "Centennial" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : apt.Floorplan === "Clifton" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : apt.Floorplan === "Cumberland" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : apt.Floorplan === "Germantown" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : apt.Floorplan === "The Gulch" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : apt.Floorplan === "Music Row" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : apt.Floorplan === "Urbandale" ? (
-              <Image
-                src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
-                alt="studio centennial floor plan img"
-                width={400}
-                height={500}
-              />
-            ) : (
-              "Error"
-            )}
-          </div>
-          <div className="flex flex-col">
-            <p className="text-sm text-blue-900 font-medium font-sans">
-              Starting at ${apt.Price}
-            </p>
-            <p className="text-xs text-blue-900">
-              Available starting{" "}
-              {new Date(apt.Availability * 1000).toLocaleDateString("en-US")}
-            </p>
-          </div>
-        </div>
+        </DialogApartment>
       ))}
     </div>
+  );
+}
+
+export function DialogApartment({
+  children,
+  apt_number,
+  apt_floorplan,
+}: {
+  children: React.ReactNode;
+  apt_number: number;
+  apt_floorplan: string;
+}) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>{apt_floorplan}</DialogTitle>
+          <DialogDescription></DialogDescription>
+        </DialogHeader>
+        <div className="flex items-center space-x-2">
+          <div className="grid flex-1 gap-2">
+            <p>{apt_number}</p>
+          </div>
+        </div>
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <button type="button">Close</button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

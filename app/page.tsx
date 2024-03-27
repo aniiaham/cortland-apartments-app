@@ -195,35 +195,97 @@ export function DialogApartment({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-3xl h-auto">
         <DialogHeader>
           <DialogTitle className="text-blue-900 font-normal font-sans text-3xl">
             Apt #{apt_number}
           </DialogTitle>
-          <DialogDescription></DialogDescription>
+          <DialogDescription>
+            <div className="flex flex-row justify-between items-center ">
+              <div>
+                <div className="flex flex-row gap-2 text-sm text-blue-900 font-normal">
+                  <p>
+                    {apt_bed_count === 0 ? "Studio" : `${apt_bed_count} Bed`} |
+                  </p>
+                  <p>{apt_bath_count} Bath |</p>
+                  <p>{apt_sqft} sq ft</p>
+                </div>
+                <div>
+                  <p className="text-blue-900 font-medium font-sans text-base">
+                    Starting at ${apt_price}
+                  </p>
+                  <p className="text-xs text-blue-900 font-normal">
+                    $565 Deposit
+                  </p>
+                  <p className="text-xs text-blue-900 font-normal">
+                    Available starting{" "}
+                    {new Date(apt_availability * 1000).toLocaleDateString(
+                      "en-US"
+                    )}
+                  </p>
+                </div>
+                <p className="text-blue-900 font-medium font-sans text-base">
+                  {apt_floorplan}
+                </p>
+              </div>
+              <div>
+                {apt_floorplan === "Centennial" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : apt_floorplan === "Clifton" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : apt_floorplan === "Cumberland" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : apt_floorplan === "Germantown" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : apt_floorplan === "The Gulch" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : apt_floorplan === "Music Row" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : apt_floorplan === "Urbandale" ? (
+                  <Image
+                    src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
+                    alt="studio centennial floor plan img"
+                    width={400}
+                    height={500}
+                  />
+                ) : (
+                  "Error"
+                )}
+              </div>
+            </div>
+          </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center space-x-2">
-          <div className="grid flex-1 gap-2">
-            <div className="flex flex-row gap-2 text-sm text-blue-900 font-normal">
-              <p>{apt_bed_count === 0 ? "Studio" : `${apt_bed_count} Bed`} |</p>
-              <p>{apt_bath_count} Bath |</p>
-              <p>{apt_sqft} sq ft</p>
-            </div>
-            <div>
-              <p className="text-blue-900 font-medium font-sans text-base">
-                Starting at ${apt_price}
-              </p>
-              <p className="text-xs text-blue-900 font-normal">$565 Deposit</p>
-              <p className="text-xs text-blue-900 font-normal">
-                Available starting{" "}
-                {new Date(apt_availability * 1000).toLocaleDateString("en-US")}
-              </p>
-            </div>
-            <p className="text-blue-900 font-medium font-sans text-base">
-              {apt_floorplan}
-            </p>
-          </div>
-        </div>
+
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <button type="button" className="text-blue-950">

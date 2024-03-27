@@ -74,6 +74,11 @@ async function ApartmentsList() {
           key={apt.Number}
           apt_number={apt.Number}
           apt_floorplan={apt.Floorplan}
+          apt_sqft={apt.Sqft}
+          apt_bed_count={apt.Bed_count}
+          apt_bath_count={apt.Bath_count}
+          apt_price={apt.Price}
+          apt_availability={apt.Availability}
         >
           <div
             className="border border-gray-300 rounded-md py-8 px-6 hover:border-gray-500 shadow-md hover:cursor-pointer flex flex-col gap-12"
@@ -172,27 +177,58 @@ export function DialogApartment({
   children,
   apt_number,
   apt_floorplan,
+  apt_sqft,
+  apt_bed_count,
+  apt_bath_count,
+  apt_price,
+  apt_availability,
 }: {
   children: React.ReactNode;
   apt_number: number;
   apt_floorplan: string;
+  apt_sqft: number;
+  apt_bed_count: number;
+  apt_bath_count: number;
+  apt_price: number;
+  apt_availability: number;
 }) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{apt_floorplan}</DialogTitle>
+          <DialogTitle className="text-blue-900 font-normal font-sans text-3xl">
+            Apt #{apt_number}
+          </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
-            <p>{apt_number}</p>
+            <div className="flex flex-row gap-2 text-sm text-blue-900 font-normal">
+              <p>{apt_bed_count === 0 ? "Studio" : `${apt_bed_count} Bed`} |</p>
+              <p>{apt_bath_count} Bath |</p>
+              <p>{apt_sqft} sq ft</p>
+            </div>
+            <div>
+              <p className="text-blue-900 font-medium font-sans text-base">
+                Starting at ${apt_price}
+              </p>
+              <p className="text-xs text-blue-900 font-normal">$565 Deposit</p>
+              <p className="text-xs text-blue-900 font-normal">
+                Available starting{" "}
+                {new Date(apt_availability * 1000).toLocaleDateString("en-US")}
+              </p>
+            </div>
+            <p className="text-blue-900 font-medium font-sans text-base">
+              {apt_floorplan}
+            </p>
           </div>
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <button type="button">Close</button>
+            <button type="button" className="text-blue-950">
+              Close
+            </button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

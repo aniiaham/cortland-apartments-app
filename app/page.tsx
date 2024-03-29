@@ -195,14 +195,14 @@ export function DialogApartment({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-3xl h-auto">
+      <DialogContent className="max-w-4xl flex flex-col justify-center">
         <DialogHeader>
-          <DialogTitle className="text-blue-900 font-normal font-sans text-3xl">
-            Apt #{apt_number}
-          </DialogTitle>
-          <DialogDescription>
-            <div className="flex flex-row justify-between items-center ">
-              <div>
+          <div>
+            <div className="flex flex-row justify-between items-center ml-14">
+              <div className="flex flex-col gap-4 justify-center items-center">
+                <h2 className="text-blue-900 font-normal font-sans text-3xl">
+                  Apt #{apt_number}
+                </h2>
                 <div className="flex flex-row gap-2 text-sm text-blue-900 font-normal">
                   <p>
                     {apt_bed_count === 0 ? "Studio" : `${apt_bed_count} Bed`} |
@@ -210,7 +210,7 @@ export function DialogApartment({
                   <p>{apt_bath_count} Bath |</p>
                   <p>{apt_sqft} sq ft</p>
                 </div>
-                <div>
+                <div className="flex flex-col justify-center items-center">
                   <p className="text-blue-900 font-medium font-sans text-base">
                     Starting at ${apt_price}
                   </p>
@@ -224,75 +224,86 @@ export function DialogApartment({
                     )}
                   </p>
                 </div>
-                <p className="text-blue-900 font-medium font-sans text-base">
-                  {apt_floorplan}
-                </p>
+                <div className="flex flex-col justify-center items-center">
+                  <p className="text-blue-900 font-medium font-sans text-base">
+                    {apt_floorplan}
+                  </p>
+                  <button className="text-blue-900 font-normal">
+                    View all Available
+                  </button>
+                </div>
               </div>
-              <div>
+              <div className="mt-4 flex flex-col justify-center items-center">
                 {apt_floorplan === "Centennial" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : apt_floorplan === "Clifton" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : apt_floorplan === "Cumberland" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : apt_floorplan === "Germantown" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : apt_floorplan === "The Gulch" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : apt_floorplan === "Music Row" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : apt_floorplan === "Urbandale" ? (
                   <Image
                     src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
                     alt="studio centennial floor plan img"
-                    width={400}
-                    height={500}
+                    width={500}
+                    height={600}
                   />
                 ) : (
                   "Error"
                 )}
               </div>
             </div>
-          </DialogDescription>
+          </div>
         </DialogHeader>
-
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <button type="button" className="text-blue-950">
-              Close
-            </button>
-          </DialogClose>
-        </DialogFooter>
+        <div className="flex flex-col gap-2 text-center text-gray-500 text-xs max-w-xs ml-2">
+          <p>
+            Pricing and availability are current as of 9:11 AM CDT on Mar 28,
+            2024 and are subject to change.
+          </p>
+          <p>
+            Dimensions and square footage shown are approximate. Actual interior
+            finishes, as well as patios and balconies, may vary by apartment
+            home. Pricing and availability are subject to change. Deposit amount
+            may vary, as low as $0 with Jetty, depending on applicant’s credit.
+            Contact leasing office for details.
+          </p>
+        </div>
+        <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
   );

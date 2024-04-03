@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import fetchApartments from "./fetchApartments";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
   return (
@@ -173,6 +174,21 @@ async function ApartmentsList() {
   );
 }
 
+function TabsApartment() {
+  return (
+    <Tabs defaultValue="account" className="w-[400px]">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        Make changes to your account here.
+      </TabsContent>
+      <TabsContent value="password">Change your password here.</TabsContent>
+    </Tabs>
+  );
+}
+
 export function DialogApartment({
   children,
   apt_number,
@@ -299,7 +315,7 @@ export function DialogApartment({
             Dimensions and square footage shown are approximate. Actual interior
             finishes, as well as patios and balconies, may vary by apartment
             home. Pricing and availability are subject to change. Deposit amount
-            may vary, as low as $0 with Jetty, depending on applicant’s credit.
+            may vary, as low as $0 with Jetty, depending on applicant's credit.
             Contact leasing office for details.
           </p>
         </div>

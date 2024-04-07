@@ -1,4 +1,4 @@
-type Apartments = {
+export type Apartments = {
   Number: number;
   Price: number;
   Floorplan: string;

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import fetchApartments from "./fetchApartments";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import fetchApartmentHistory from "./fetchApartmentHistory";
 
 export default function Home() {
   return (
@@ -174,7 +175,7 @@ async function ApartmentsList() {
   );
 }
 
-function TabsApartment({
+async function TabsApartment({
   children,
   apt_number,
   apt_floorplan,
@@ -193,6 +194,9 @@ function TabsApartment({
   apt_price: number;
   apt_availability: number;
 }) {
+  const history = await fetchApartmentHistory({ apt_number });
+  if (!history) return null;
+
   return (
     <Tabs defaultValue="apartments" className="w-[400px]">
       <TabsList>

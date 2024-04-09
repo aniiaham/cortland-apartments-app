@@ -204,34 +204,55 @@ async function TabsApartment({
         <TabsTrigger value="price">Price History</TabsTrigger>
       </TabsList>
       <TabsContent value="apartments">
-        <div className="flex flex-row justify-between items-center ml-14">
-          <div className="flex flex-col gap-4 justify-center items-center">
-            <h2 className="text-blue-900 font-normal font-sans text-3xl">
-              Apt #{apt_number}
-            </h2>
-            <div className="flex flex-row gap-2 text-sm text-blue-900 font-normal">
-              <p>{apt_bed_count === 0 ? "Studio" : `${apt_bed_count} Bed`} |</p>
-              <p>{apt_bath_count} Bath |</p>
-              <p>{apt_sqft} sq ft</p>
+        <div className="flex flex-col gap-12">
+          <div className="flex flex-row justify-between items-center ml-14 mt-8">
+            <div className="flex flex-col gap-4 justify-center items-center">
+              <h2 className="text-blue-900 font-normal font-sans text-3xl">
+                Apt #{apt_number}
+              </h2>
+              <div className="flex flex-row gap-2 text-sm text-blue-900 font-normal">
+                <p>
+                  {apt_bed_count === 0 ? "Studio" : `${apt_bed_count} Bed`} |
+                </p>
+                <p>{apt_bath_count} Bath |</p>
+                <p>{apt_sqft} sq ft</p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-blue-900 font-medium font-sans text-base">
+                  Starting at ${apt_price}
+                </p>
+                <p className="text-xs text-blue-900 font-normal">
+                  $565 Deposit
+                </p>
+                <p className="text-xs text-blue-900 font-normal">
+                  Available starting{" "}
+                  {new Date(apt_availability * 1000).toLocaleDateString(
+                    "en-US"
+                  )}
+                </p>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-blue-900 font-medium font-sans text-base">
+                  {apt_floorplan} Floorplan
+                </p>
+                <button className="text-blue-900 font-normal">
+                  View all Available
+                </button>
+              </div>
             </div>
-            <div className="flex flex-col justify-center items-center">
-              <p className="text-blue-900 font-medium font-sans text-base">
-                Starting at ${apt_price}
-              </p>
-              <p className="text-xs text-blue-900 font-normal">$565 Deposit</p>
-              <p className="text-xs text-blue-900 font-normal">
-                Available starting{" "}
-                {new Date(apt_availability * 1000).toLocaleDateString("en-US")}
-              </p>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <p className="text-blue-900 font-medium font-sans text-base">
-                {apt_floorplan} Floorplan
-              </p>
-              <button className="text-blue-900 font-normal">
-                View all Available
-              </button>
-            </div>
+          </div>
+          <div className="flex flex-col gap-2 text-center text-gray-500 text-xs max-w-xs ml-2">
+            <p>
+              Pricing and availability are current as of 9:11 AM CDT on Mar 28,
+              2024 and are subject to change.
+            </p>
+            <p>
+              Dimensions and square footage shown are approximate. Actual
+              interior finishes, as well as patios and balconies, may vary by
+              apartment home. Pricing and availability are subject to change.
+              Deposit amount may vary, as low as $0 with Jetty, depending on
+              applicant's credit. Contact leasing office for details.
+            </p>
           </div>
         </div>
       </TabsContent>
@@ -332,19 +353,6 @@ export function DialogApartment({
             </div>
           </div>
         </DialogHeader>
-        <div className="flex flex-col gap-2 text-center text-gray-500 text-xs max-w-xs ml-2">
-          <p>
-            Pricing and availability are current as of 9:11 AM CDT on Mar 28,
-            2024 and are subject to change.
-          </p>
-          <p>
-            Dimensions and square footage shown are approximate. Actual interior
-            finishes, as well as patios and balconies, may vary by apartment
-            home. Pricing and availability are subject to change. Deposit amount
-            may vary, as low as $0 with Jetty, depending on applicant's credit.
-            Contact leasing office for details.
-          </p>
-        </div>
         <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>

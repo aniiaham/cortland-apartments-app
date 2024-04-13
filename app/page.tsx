@@ -151,6 +151,13 @@ async function ApartmentsList() {
                   width={400}
                   height={500}
                 />
+              ) : apt.Floorplan === "Elizabeth" ? (
+                <Image
+                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Elizabeth-A24-6a6754e6c72dcd6fcc7b19c341533e8c.jpg"
+                  alt="studio centennial floor plan img"
+                  width={400}
+                  height={500}
+                />
               ) : (
                 "Error"
               )}

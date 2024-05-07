@@ -12,10 +12,8 @@ export type Apartments = {
   City: "Nashville";
 };
 
-const fetchApartments = async () => {
+export const fetchApartments = async () => {
   const res = await fetch("http://localhost:6969/apartments");
   const response = (await res.json()) as { apartments: Apartments[] };
   return response;
 };
-
-export default fetchApartments;

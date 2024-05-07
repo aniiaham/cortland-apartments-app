@@ -18,6 +18,7 @@ const fetchApartmentHistory = async ({
   console.log(apt_number);
   const res = await fetch(`http://localhost:6969/apartments/${apt_number}`);
   const response = (await res.json()) as { apartment: ApartmentWithHistory };
+  console.log(response.apartment.History);
   if (!response.apartment?.History) return null;
   return response.apartment.History;
 };

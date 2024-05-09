@@ -12,7 +12,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import fetchApartmentHistory from "./fetchApartmentHistory";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { TableDemo } from "./prices";
 
 export default function ApartmentsList() {
   const { data } = useQuery({
@@ -117,7 +117,7 @@ export default function ApartmentsList() {
             </div>
             <div className="flex flex-row justify-between text-blue-900">
               <div className="flex flex-col">
-                <p className="text-sm  font-medium font-sans">
+                <p className="text-sm font-medium font-sans">
                   Starting at ${apt.Price}
                 </p>
                 <p className="text-xs">
@@ -135,7 +135,7 @@ export default function ApartmentsList() {
   );
 }
 
-function TabsApartment({
+export function TabsApartment({
   children,
   apt_number,
   apt_floorplan,
@@ -154,22 +154,21 @@ function TabsApartment({
   apt_price: number;
   apt_availability: number;
 }) {
-  const [history, setHistory] = useState<Array<{}> | undefined>(undefined);
+  const { data, isLoading } = useQuery({
+    queryKey: ["history", apt_number],
+    queryFn: () => fetchApartmentHistory({ apt_number }),
+  });
+  // console.log(data);
 
-  useEffect(() => {
-    async function fetchData() {
-      const hist = await fetchApartmentHistory({ apt_number });
-      if (hist) {
-        setHistory(hist);
-      } else {
-        setHistory(undefined);
-      }
-    }
+  if (!data) {
+    return <div>No data</div>;
+  }
 
-    fetchData();
-  }, [apt_number]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  if (!history) return null;
+  console.log(data);
 
   return (
     <Tabs defaultValue="apartments" className="w-[400px]">
@@ -230,7 +229,22 @@ function TabsApartment({
           </div>
         </div>
       </TabsContent>
-      <TabsContent value="price">Price history goes here.</TabsContent>
+      <TabsContent value="price">
+        {/* <div>
+          {data.map((item) => {
+            return (
+              <div
+                key={item.Id}
+                className="flex felx-row justify-between text-blue-900 text-sm font-medium font-sans"
+              >
+                <div>{new Date(item.Date).toLocaleDateString("en-US")}</div>
+                <div>{item.Price}</div>
+              </div>
+            );
+          })}
+        </div> */}
+        <TableDemo apt_number={apt_number} />
+      </TabsContent>
     </Tabs>
   );
 }

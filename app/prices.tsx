@@ -11,6 +11,11 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import fetchApartmentHistory from "./fetchApartmentHistory";
 import Charts from "@/components/Charts";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+const tags = Array.from({ length: 50 }).map(
+  (_, i, a) => `v1.2.0-beta.${a.length - i}`
+);
 
 export function TableDemo({ apt_number }: { apt_number: number }) {
   const { data, isLoading } = useQuery({
@@ -30,34 +35,36 @@ export function TableDemo({ apt_number }: { apt_number: number }) {
   return (
     <div>
       <div>
-        <Table>
-          <TableCaption>A list of price changes</TableCaption>
-          <TableHeader>
-            <TableRow className="text-blue-900 text-base font-medium font-sans">
-              <TableHead className="w-[100px]">Date</TableHead>
-              <TableHead>Location</TableHead>
-              <TableHead>Number</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.map((item) => (
-              <TableRow
-                key={item.Id}
-                className="text-right text-blue-900 text-sm font-normal font-sans"
-              >
-                <TableCell>
-                  {new Date(item.Date).toLocaleDateString("en-US")}
-                </TableCell>
-                <TableCell>{item.Location}</TableCell>
-                <TableCell>{item.Number}</TableCell>
-                <TableCell>${item.Price}</TableCell>
+        <ScrollArea className="h-80 w-full rounded-md border">
+          <Table>
+            <TableCaption>A list of price changes</TableCaption>
+            <TableHeader>
+              <TableRow className="text-blue-900 text-base font-medium font-sans">
+                <TableHead className="w-[100px]">Date</TableHead>
+                <TableHead>Location</TableHead>
+                <TableHead>Number</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter></TableFooter>
-        </Table>
-        <Charts apt_number={apt_number} />
+            </TableHeader>
+            <TableBody>
+              {data.map((item) => (
+                <TableRow
+                  key={item.Id}
+                  className="text-right text-blue-900 text-sm font-normal font-sans"
+                >
+                  <TableCell>
+                    {new Date(item.Date).toLocaleDateString("en-US")}
+                  </TableCell>
+                  <TableCell>{item.Location}</TableCell>
+                  <TableCell>{item.Number}</TableCell>
+                  <TableCell>${item.Price}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter></TableFooter>
+          </Table>
+          <Charts apt_number={apt_number} />
+        </ScrollArea>
       </div>{" "}
       {/* {data.map((item) => (
         <div

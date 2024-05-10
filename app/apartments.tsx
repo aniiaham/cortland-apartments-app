@@ -158,7 +158,6 @@ export function TabsApartment({
     queryKey: ["history", apt_number],
     queryFn: () => fetchApartmentHistory({ apt_number }),
   });
-  // console.log(data);
 
   if (!data) {
     return <div>No data</div>;
@@ -171,12 +170,12 @@ export function TabsApartment({
   console.log(data);
 
   return (
-    <Tabs defaultValue="apartments" className="w-[400px]">
+    <Tabs defaultValue="apartments">
       <TabsList>
         <TabsTrigger value="apartments">Available Apartment</TabsTrigger>
         <TabsTrigger value="price">Price History</TabsTrigger>
       </TabsList>
-      <TabsContent value="apartments">
+      <TabsContent value="apartments" className="flex flex-row gap-12 w-full">
         <div className="flex flex-col gap-12">
           <div className="flex flex-row justify-between items-center ml-14 mt-8">
             <div className="flex flex-col gap-4 justify-center items-center">
@@ -228,21 +227,62 @@ export function TabsApartment({
             </p>
           </div>
         </div>
+        <div className="mt-4 flex flex-col justify-center items-center">
+          {apt_floorplan === "Centennial" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Clifton" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Cumberland" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Germantown" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "The Gulch" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Music Row" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Urbandale" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : (
+            "Error"
+          )}
+        </div>
       </TabsContent>
       <TabsContent value="price">
-        {/* <div>
-          {data.map((item) => {
-            return (
-              <div
-                key={item.Id}
-                className="flex felx-row justify-between text-blue-900 text-sm font-medium font-sans"
-              >
-                <div>{new Date(item.Date).toLocaleDateString("en-US")}</div>
-                <div>{item.Price}</div>
-              </div>
-            );
-          })}
-        </div> */}
         <TableDemo apt_number={apt_number} />
       </TabsContent>
     </Tabs>
@@ -273,73 +313,16 @@ export function DialogApartment({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-4xl flex flex-col justify-center">
         <DialogHeader>
-          <div className="flex flex-row">
-            <TabsApartment
-              children
-              apt_number={apt_number}
-              apt_floorplan={apt_floorplan}
-              apt_sqft={apt_sqft}
-              apt_bed_count={apt_bed_count}
-              apt_bath_count={apt_bath_count}
-              apt_price={apt_price}
-              apt_availability={apt_availability}
-            />
-
-            <div className="mt-4 flex flex-col justify-center items-center">
-              {apt_floorplan === "Centennial" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_StudioCentennial-S12-6b6e8ad01943e96acd89df93cc5d8a05.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : apt_floorplan === "Clifton" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Clifton-S33-e637740fc82fbe6d829dc0d5d9a4d8b6.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : apt_floorplan === "Cumberland" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : apt_floorplan === "Germantown" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : apt_floorplan === "The Gulch" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_The-Gulch-A42-ed3db82e9f56231d124c76215e8548a4.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : apt_floorplan === "Music Row" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Music-Row-B12-bf6f3c1a0d84556095b3e8eeb576fe33.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : apt_floorplan === "Urbandale" ? (
-                <Image
-                  src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
-                  alt="studio centennial floor plan img"
-                  width={500}
-                  height={600}
-                />
-              ) : (
-                "Error"
-              )}
-            </div>
-          </div>
+          <TabsApartment
+            children
+            apt_number={apt_number}
+            apt_floorplan={apt_floorplan}
+            apt_sqft={apt_sqft}
+            apt_bed_count={apt_bed_count}
+            apt_bath_count={apt_bath_count}
+            apt_price={apt_price}
+            apt_availability={apt_availability}
+          />
         </DialogHeader>
         <DialogFooter></DialogFooter>
       </DialogContent>

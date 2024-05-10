@@ -7,9 +7,6 @@ import {
 } from "@tanstack/react-query";
 import { fetchApartments } from "./fetchApartments";
 import ApartmentsList from "./apartments";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import Charts from "../components/Charts";
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -21,7 +18,6 @@ export default async function Home() {
 
   return (
     <main>
-      <Charts />
       <div className="flex min-h-screen flex-col items-center justify-between bg-white w-full">
         <nav className="w-full mt-2 p-8 flex flex-row justify-between items-center">
           <Image

@@ -5,7 +5,7 @@ interface ApartmentWithHistory extends Apartments {
     Id: string;
     Number: number;
     Price: number;
-    Date: number;
+    Date: Date;
     Location: string;
   }[];
 }

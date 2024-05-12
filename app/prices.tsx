@@ -43,14 +43,14 @@ export function TableDemo({ apt_number }: { apt_number: number }) {
                 <TableHead className="w-[100px]">Date</TableHead>
                 <TableHead>Location</TableHead>
                 <TableHead>Number</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
+                <TableHead>Amount</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {data.map((item) => (
                 <TableRow
                   key={item.Id}
-                  className="text-right text-blue-900 text-sm font-normal font-sans"
+                  className=" text-blue-900 text-sm font-normal font-sans"
                 >
                   <TableCell>
                     {new Date(item.Date).toLocaleDateString("en-US")}

@@ -50,12 +50,15 @@ const BarChartPlot = ({ apt_number }: { apt_number: number }) => {
     });
   }, [data]);
 
-  console.log(formatted_data);
-
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart width={730} height={250} data={formatted_data}>
+        <BarChart
+          width={730}
+          height={250}
+          data={formatted_data}
+          className="p-4"
+        >
           <XAxis dataKey="Date" />
           <YAxis />
           <Tooltip />

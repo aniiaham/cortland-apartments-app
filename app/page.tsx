@@ -8,6 +8,7 @@ import {
 import { fetchApartments } from "./fetchApartments";
 import ApartmentsList from "./apartments";
 
+
 export default async function Home() {
   const queryClient = new QueryClient();
 

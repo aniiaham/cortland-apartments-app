@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import fetchApartmentHistory from "./fetchApartmentHistory";
 import Image from "next/image";
 import { TableDemo } from "./prices";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ApartmentsList() {
   const { data } = useQuery({
@@ -164,10 +165,32 @@ export function TabsApartment({
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
-  }
+    return (
+      <div className="flex flex-row justify-between mx-14 h-96">
+        <div className="flex flex-col space-y-3 mt-8">
+          <div>
+            <Skeleton className="h-[40px] w-[140px] rounded-xl ml-6" />
+          </div>
 
-  console.log(data);
+          <div className="space-y-2">
+            <Skeleton className="h-8 w-[200px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+          <div>
+            <div className="space-y-2">
+              <Skeleton className="h-5 w-[200px]" />
+            </div>
+            <div className="mt-6">
+              <Skeleton className="h-[130px] w-[200px] rounded-xl" />
+            </div>
+          </div>
+        </div>
+        <div className="mt-14">
+          <Skeleton className="h-[260px] w-[360px] rounded-xl ml-6" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Tabs defaultValue="apartments">

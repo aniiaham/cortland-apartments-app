@@ -63,17 +63,8 @@ export function TableDemo({ apt_number }: { apt_number: number }) {
             </TableBody>
             <TableFooter></TableFooter>
           </Table>
-          <Charts apt_number={apt_number} />
         </ScrollArea>
-      </div>{" "}
-      {/* {data.map((item) => (
-        <div
-          key={item.Id}
-          className="text-right text-blue-900 text-sm font-normal font-sans"
-        >
-          <AreaChartPlot />
-        </div>
-      ))} */}
+      </div>
     </div>
   );
 }

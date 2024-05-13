@@ -14,6 +14,7 @@ import fetchApartmentHistory from "./fetchApartmentHistory";
 import Image from "next/image";
 import { TableDemo } from "./prices";
 import { Skeleton } from "@/components/ui/skeleton";
+import Charts from "@/components/Charts";
 
 export default function ApartmentsList() {
   const { data } = useQuery({
@@ -197,6 +198,7 @@ export function TabsApartment({
       <TabsList>
         <TabsTrigger value="apartments">Available Apartment</TabsTrigger>
         <TabsTrigger value="price">Price History</TabsTrigger>
+        <TabsTrigger value="price-chart">Price Chart</TabsTrigger>
       </TabsList>
       <TabsContent value="apartments" className="flex flex-row gap-12 w-full">
         <div className="flex flex-col gap-12">
@@ -230,9 +232,11 @@ export function TabsApartment({
                 <p className="text-blue-900 font-medium font-sans text-base">
                   {apt_floorplan} Floorplan
                 </p>
-                <button className="text-blue-900 font-normal">
-                  View all Available
-                </button>
+                <a href="/">
+                  <button className="text-blue-900 font-normal">
+                    View all Available
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -307,6 +311,9 @@ export function TabsApartment({
       </TabsContent>
       <TabsContent value="price">
         <TableDemo apt_number={apt_number} />
+      </TabsContent>
+      <TabsContent value="price-chart">
+        <Charts apt_number={apt_number} />
       </TabsContent>
     </Tabs>
   );

@@ -1,5 +1,6 @@
 import fetchApartmentHistory from "@/app/fetchApartmentHistory";
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import {
   AreaChart,
   Area,
@@ -21,7 +22,7 @@ export const AreaChartPlot = ({ apt_number }: { apt_number: number }) => {
     queryKey: ["history", apt_number],
     queryFn: () => fetchApartmentHistory({ apt_number }),
   });
-  console.log(apt_number);
+  // console.log(apt_number);
   // console.log(data);
   if (!data) {
     return <div>No data</div>;
@@ -31,13 +32,23 @@ export const AreaChartPlot = ({ apt_number }: { apt_number: number }) => {
     return <div>Loading...</div>;
   }
 
+  const formattedDate = useMemo(() => {
+    return data.map((v) => {
+      const newDate = new Date(v.Date).toLocaleDateString("en-US");
+      return {
+        ...v,
+        Date: newDate,
+      };
+    });
+  }, [data]);
+
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={730}
           height={250}
-          data={data}
+          data={formattedDate}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           className="p-4"
         >

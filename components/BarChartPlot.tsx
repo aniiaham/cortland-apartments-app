@@ -35,16 +35,19 @@ const BarChartPlot = ({ apt_number }: { apt_number: number }) => {
 
   const formatted_data = useMemo(() => {
     return data.map((v, index) => {
+      const newDate = new Date(v.Date).toLocaleDateString("en-US");
       const prevIndex = index - 1;
       if (index === 0) {
         return {
           ...v,
           fill: "#4CBB17",
+          Date: newDate,
         };
       } else {
         return {
           ...v,
           fill: data[prevIndex].Price >= v.Price ? "#4CBB17" : "#FF5733",
+          Date: newDate,
         };
       }
     });

@@ -8,7 +8,6 @@ import {
 import { fetchApartments } from "./fetchApartments";
 import ApartmentsList from "./apartments";
 
-
 export default async function Home() {
   const queryClient = new QueryClient();
 
@@ -31,7 +30,6 @@ export default async function Home() {
             Schedule a Tour
           </button>
         </nav>
-
         <div className="flex flex-col justify-center items-center gap-8 w-full">
           <div className="flex flex-col justify-center items-center relative">
             <Image
@@ -58,7 +56,6 @@ export default async function Home() {
           </div>
         </div>
         <div className="mt-8">
-          <p className="text-lg text-blue-900">Available Apts</p>
           <HydrationBoundary state={dehydrate(queryClient)}>
             <ApartmentsList />
           </HydrationBoundary>

@@ -32,31 +32,29 @@ export default function ApartmentsList() {
 
   if (!data) return;
 
-  const [apartments, setApartments] = useState(data.apartments);
+  const [selectedApartments, setSelectedApartments] = useState("all");
 
-  // console.log(apartment);
-
-  const filterApartments = apartments.filter((apartment) =>
-    apartment.Bed_count === 0
-      ? "studio"
-      : apartment.Bed_count === 1
-      ? "1 BED"
-      : apartment.Bed_count === 2
-      ? "2 BED"
-      : "NONE"
-  );
-  console.log(filterApartments);
+  const filterApartments =
+    selectedApartments === "all"
+      ? data.apartments
+      : data.apartments.filter(
+          (apartment) => apartment.Bed_count === Number(selectedApartments)
+        );
 
   return (
     <section>
       <div className="flex flex-row justify-between">
         <p className="text-lg text-blue-900">Available Apts</p>
 
-        <Select>
+        <Select
+          onValueChange={setSelectedApartments}
+          defaultValue={selectedApartments}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter" />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="all">All</SelectItem>
             <SelectItem value="0">Studio</SelectItem>
             <SelectItem value="1">1 Bedroom</SelectItem>
             <SelectItem value="2">2 Bedroom</SelectItem>
@@ -64,7 +62,7 @@ export default function ApartmentsList() {
         </Select>
       </div>
       <div className="grid grid-cols-2 gap-20 w-full my-8 h-full">
-        {data.apartments.map((apt) => (
+        {filterApartments.map((apt) => (
           <DialogApartment
             key={apt.Number}
             apt_number={apt.Number}

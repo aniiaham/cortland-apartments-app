@@ -306,6 +306,13 @@ export function TabsApartment({
               width={500}
               height={600}
             />
+          ) : apt_floorplan === "Charlotte" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Charlotte-S22-e06e7a69dd88a4e2052a4204081ac549.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
           ) : apt_floorplan === "Cumberland" ? (
             <Image
               src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Cumberland-A12-5802b719708e1605b6731731834922b7.jpg"
@@ -316,6 +323,34 @@ export function TabsApartment({
           ) : apt_floorplan === "Germantown" ? (
             <Image
               src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1-Germantown-A32-953be8326aca3dcbde2ee210b067ee05.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Elizabeth" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Elizabeth-A24-6a6754e6c72dcd6fcc7b19c341533e8c.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Hadley" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x1Hadley-A52-818df9e4edced0643497f0ad75f93607.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Hillwood" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1Hillwood-A62-2943ebc31d79c1ba3a9f40143d2373c0.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "The Nations" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_1x1The-Nations-A72-bfdc3e61c2a44830a0f6b80f3dc72385.jpg"
               alt="studio centennial floor plan img"
               width={500}
               height={600}
@@ -337,6 +372,13 @@ export function TabsApartment({
           ) : apt_floorplan === "Urbandale" ? (
             <Image
               src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2Urbandale-B33-0b757bedc8c4abacf0a9caba232a799f.jpg"
+              alt="studio centennial floor plan img"
+              width={500}
+              height={600}
+            />
+          ) : apt_floorplan === "Sylvan" ? (
+            <Image
+              src="https://cortland.com/assets/images/cache/CortlandAtTheNations_4731CentennialBlvd_3DF_2x2-Slyvan-B22-6a626ff70419f651530ba13303e08408.jpg"
               alt="studio centennial floor plan img"
               width={500}
               height={600}
